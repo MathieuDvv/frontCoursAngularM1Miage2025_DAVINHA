@@ -1,0 +1,75 @@
+<div class="assignments-container">
+  
+  <ng-container *ngIf="authService.isAuthenticated(); else notConnected">
+    <div class="filters-container">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput [(ngModel)]="searchTerm" (keyup)="applyFilters()" placeholder="Rechercher...">
+      </mat-form-field>
+
+      <div class="filters-controls">
+        <mat-form-field appearance="outline" class="sort-field">
+          <mat-icon matPrefix>sort</mat-icon>
+          <mat-select [(ngModel)]="sortOrder" (selectionChange)="applyFilters()">
+            <mat-option value="asc">Croissant</mat-option>
+            <mat-option value="desc">Décroissant</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-checkbox [(ngModel)]="hideCompleted" (change)="applyFilters()">
+          Masquer rendus
+        </mat-checkbox>
+      </div>
+    </div>
+
+    <mat-paginator 
+        [length]="totalDocs"
+        [pageSize]="limit"
+        [pageSizeOptions]="[5, 10, 20, 50, 100]"
+        (page)="onPageChange($event)"
+        showFirstLastButtons
+        aria-label="Select page of assignments">
+    </mat-paginator>
+
+    <mat-accordion multi="true">
+      <div *ngFor="let group of groupedAssignments">
+        <h2>{{ group.date | date:'fullDate' }}</h2>
+        <mat-expansion-panel *ngFor="let assignment of group.assignments">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span class="status-dot" [class.rendu]="assignment.rendu" [class.non-rendu]="!assignment.rendu"></span>
+              <a [routerLink]="['/assignment', assignment._id]" class="assignment-title">{{ assignment.nom }}</a>
+            </mat-panel-title>
+            <button mat-icon-button class="edit-button" [routerLink]="['/assignment', assignment._id]" [queryParams]="{ edit: true }" *ngIf="authService.isAdmin()" (click)="$event.stopPropagation()">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-expansion-panel-header>
+
+          <div class="panel-content">
+            <p>{{ assignment.description }}</p>
+            <div class="actions">
+              <mat-checkbox [(ngModel)]="assignment.rendu" (change)="onRenduChange(assignment)" [disabled]="!authService.isAuthenticated()">
+                Rendu
+              </mat-checkbox>
+              <span class="spacer"></span>
+              <button mat-raised-button color="warn" (click)="onDelete(assignment)" *ngIf="authService.isAdmin()">
+                Supprimer
+              </button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </div>
+    </mat-accordion>
+  </ng-container>
+
+  <ng-template #notConnected>
+    <div class="not-connected-state">
+      <mat-icon class="large-icon">lock</mat-icon>
+      <h2>Connectez-vous pour voir vos devoirs</h2>
+      <p>Accédez à votre espace personnel pour gérer vos tâches.</p>
+      <button mat-raised-button color="primary" routerLink="/login">
+        <mat-icon>login</mat-icon> Se connecter
+      </button>
+    </div>
+  </ng-template>
+</div>

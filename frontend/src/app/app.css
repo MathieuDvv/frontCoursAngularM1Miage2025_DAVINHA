@@ -1,0 +1,114 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.example-container {
+  flex: 1;
+}
+
+mat-sidenav {
+    width: 250px;
+}
+
+.sidenav-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.sidenav-footer {
+    padding: 16px;
+    border-top: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    background-color: #e0e0e0;
+    padding: 10px 15px;
+    border-radius: 25px;
+    font-size: 14px;
+    justify-content: center;
+    color: #333;
+}
+
+.user-info.not-logged-in {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    color: #666;
+    font-weight: normal;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.user-info.not-logged-in:hover {
+    background-color: #f5f5f5;
+}
+
+.logout-btn {
+    width: 100%;
+}
+
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-toolbar {
+  margin-top: 15px; /* Explicit top margin */
+  margin-left: 10px; /* Keep some left margin */
+  margin-right: 10px; /* Keep some right margin */
+  border-radius: 8px; /* Rounded corners */
+  /* box-shadow removed */
+}
+
+.main-content {
+  flex: 1;
+}
+
+footer {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: grey;
+  cursor: pointer;
+}
+
+.status-dot.logged-in {
+  background-color: black;
+}
+
+.db-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-indicator.online {
+  background-color: green;
+}
+
+.status-indicator.offline {
+  background-color: red;
+}

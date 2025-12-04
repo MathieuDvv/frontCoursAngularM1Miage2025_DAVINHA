@@ -1,0 +1,186 @@
+.assignments-container {
+  padding: 20px;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.filters-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px; /* Added top margin */
+  margin-bottom: 10px;
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Rounded "Pill" Style for Material Form Fields --- */
+
+/* Remove the space reserved for hint/error messages to center vertically */
+.filters-container ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+/* Target the outline segments to create the rounded shape */
+.filters-container ::ng-deep .mdc-notched-outline__leading {
+  border-top-left-radius: 25px !important;
+  border-bottom-left-radius: 25px !important;
+  width: 20px !important; /* Ensure enough width for the curve */
+}
+
+.filters-container ::ng-deep .mdc-notched-outline__trailing {
+  border-top-right-radius: 25px !important;
+  border-bottom-right-radius: 25px !important;
+}
+
+/* Remove the previous incorrect rounding attempts */
+.filters-container mat-form-field {
+  /* No border-radius on host */
+}
+
+/* Center text within inputs and selects */
+.filters-container ::ng-deep .mat-mdc-form-field-input-control .mat-mdc-form-field-input {
+  text-align: center !important;
+}
+
+.filters-container ::ng-deep .mat-mdc-select-trigger {
+  text-align: center !important;
+  justify-content: center;
+}
+
+.filters-container ::ng-deep .mat-mdc-select-value {
+  text-align: center !important;
+  width: 100%;
+  display: block; /* Ensure it takes width */
+}
+.filters-container ::ng-deep .mat-mdc-select-value-text {
+    display: block;
+    text-align: center;
+}
+
+/* Center the floating label/placeholder */
+.filters-container ::ng-deep .mat-mdc-floating-label {
+  text-align: center;
+  width: 100% !important;
+  left: 0 !important;
+  transform-origin: center !important; /* Scale from center */
+}
+
+/* Ensure the label stays centered even when floating */
+.filters-container ::ng-deep .mdc-notched-outline__notch {
+    border-right: none; /* Remove defaults that might cause gaps */
+    border-left: none;
+}
+
+/* IMPORTANT: Override the "cut" in the border for the label */
+.filters-container ::ng-deep .mdc-notched-outline__notch {
+  border-top-width: 1px !important; /* Restore the top border so it's not "cut" */
+  border-top-style: solid !important;
+  border-top-color: inherit !important; /* Match the rest of the border color */
+}
+
+/* If the label has a white background that's hiding the border, make it transparent */
+.filters-container ::ng-deep .mat-mdc-floating-label {
+    background-color: transparent !important; 
+}
+
+/* ----------------------------------------------------- */
+
+.search-field {
+  flex: 1; /* Takes up remaining space on the left */
+}
+
+.filters-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.sort-field {
+  width: 200px; /* Fixed width for sort dropdown */
+}
+
+/* Adjust material form field bottom margin to align with checkbox if needed */
+.filters-container mat-form-field {
+  margin-bottom: 0; /* Remove default material bottom margin for better alignment */
+}
+
+/* Better vertical alignment */
+.filters-container {
+  align-items: center; /* Center items vertically */
+}
+
+mat-paginator {
+  background: transparent;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.not-connected-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+  color: #666;
+}
+
+.large-icon {
+  font-size: 80px;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.status-dot.rendu {
+  background-color: green;
+}
+
+.status-dot.non-rendu {
+  background-color: red;
+}
+
+.assignment-title {
+  text-decoration: none;
+  color: inherit;
+}
+
+.assignment-title:hover {
+  text-decoration: underline;
+}
+
+.panel-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

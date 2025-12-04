@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-sidenav-container {
+  height: 100%;
+}
+
+.mat-sidenav {
+  width: 250px; /* Revert to original width or slightly larger */
+  padding: 10px 0; /* Adjust padding */
+  box-sizing: border-box;
+}
+
+.mat-sidenav .mat-list-item {
+  transition: background-color 0.2s ease-in-out; /* Keep only background color transition */
+  margin: 5px 10px; /* Add some margin around list items */
+  border-radius: 4px;
+  padding: 0 10px; /* Ensure consistent padding */
+}
+
+.mat-sidenav .mat-list-item:hover {
+  background-color: rgba(0, 0, 0, 0.04); /* Subtle hover background */
+}
+
+.main-content {
+  padding: 20px;
+}

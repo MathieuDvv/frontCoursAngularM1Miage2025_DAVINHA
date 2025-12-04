@@ -1,0 +1,72 @@
+<div class="app-container">
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="push" class="sidenav-container">
+      <div class="sidenav-inner">
+        <div class="sidenav-content">
+          <mat-list>
+            <a mat-list-item routerLink="/assignments" (click)="sidenav.toggle()">
+              <mat-icon matListItemIcon>list</mat-icon>
+              <span matListItemTitle>Liste des devoirs</span>
+            </a>
+            <a mat-list-item routerLink="/add-assignment" (click)="sidenav.toggle()" *ngIf="authService.isAdmin()">
+              <mat-icon matListItemIcon>add</mat-icon>
+              <span matListItemTitle>Ajout d'un devoir</span>
+            </a>
+            <a mat-list-item href="#" *ngIf="authService.isAdmin()">
+              <mat-icon matListItemIcon>edit</mat-icon>
+              <span matListItemTitle>Modification d'un devoir</span>
+            </a>
+            <a mat-list-item href="#" *ngIf="authService.isAdmin()">
+              <mat-icon matListItemIcon>delete_forever</mat-icon>
+              <span matListItemTitle>Suppression d'un devoir</span>
+            </a>
+            <a mat-list-item (click)="initDB(); sidenav.toggle()">
+              <mat-icon matListItemIcon>data_usage</mat-icon>
+              <span matListItemTitle>Génération de données de test</span>
+            </a>
+          </mat-list>
+        </div>
+
+        <div class="sidenav-footer">
+          <div class="user-info" *ngIf="authService.isAuthenticated(); else notLoggedIn">
+             <mat-icon>person</mat-icon>
+             <span class="user-name">{{ authService.getUser()?.name }}</span>
+          </div>
+          <button *ngIf="authService.isAuthenticated()" mat-stroked-button color="warn" (click)="logout(); sidenav.toggle()" class="logout-btn">
+            <mat-icon>exit_to_app</mat-icon>
+            Déconnexion
+          </button>
+          
+          <ng-template #notLoggedIn>
+             <div class="user-info not-logged-in" (click)="sidenav.toggle()" routerLink="/login" style="cursor: pointer;">
+               <mat-icon>login</mat-icon>
+               <span class="user-name">Connectez-vous pour commencer</span>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <mat-toolbar>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span style="margin-left: 20px;">Gestion des devoirs</span>
+        <span style="flex: 1 1 auto"></span>
+        <button mat-button matButton="filled" color="primary" routerLink="/add-assignment" *ngIf="authService.isAdmin()">
+          Ajouter un devoir
+        </button>
+      </mat-toolbar>
+      <div class="main-content">
+        <router-outlet></router-outlet>
+      </div>
+      <footer>
+        <div class="db-status">
+          <span class="label">BDD Status:</span>
+          <span class="status-indicator" [class.online]="dbStatus === 'online'" [class.offline]="dbStatus === 'offline'"></span>
+        </div>
+      </footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

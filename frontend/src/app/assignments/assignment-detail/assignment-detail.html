@@ -1,0 +1,50 @@
+<div class="detail-container">
+  <mat-card *ngIf="assignment" class="assignment-card">
+    <mat-card-header>
+      <mat-card-title>
+        <ng-container *ngIf="!editMode; else editTitle">
+          {{ assignment.nom }}
+        </ng-container>
+        <ng-template #editTitle>
+          <mat-form-field>
+            <input matInput [(ngModel)]="assignment.nom">
+          </mat-form-field>
+        </ng-template>
+      </mat-card-title>
+      <span class="spacer"></span>
+      <mat-slide-toggle [checked]="editMode" (change)="toggleEditMode()" *ngIf="authService.isAdmin()">
+        Edit Mode
+      </mat-slide-toggle>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf="!editMode; else editContent">
+        <p><strong>Date de rendu:</strong> {{ assignment.dateDeRendu | date }}</p>
+        <p><strong>Description:</strong> {{ assignment.description }}</p>
+      </ng-container>
+      <ng-template #editContent>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Date de rendu" [(ngModel)]="assignment.dateDeRendu">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput placeholder="Description" [(ngModel)]="assignment.description"></textarea>
+        </mat-form-field>
+      </ng-template>
+      <mat-checkbox [(ngModel)]="assignment.rendu" (change)="onRenduChange()" [disabled]="!authService.isAuthenticated()">
+        Rendu
+      </mat-checkbox>
+    </mat-card-content>
+    <mat-card-actions>
+      <ng-container *ngIf="editMode; else viewActions">
+        <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+        <button mat-button (click)="toggleEditMode()">Cancel</button>
+      </ng-container>
+      <ng-template #viewActions>
+        <button mat-raised-button color="warn" (click)="onDelete()" *ngIf="authService.isAdmin()">
+          Supprimer
+        </button>
+      </ng-template>
+    </mat-card-actions>
+  </mat-card>
+</div>
