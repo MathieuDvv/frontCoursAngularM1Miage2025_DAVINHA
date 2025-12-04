@@ -1,56 +1,49 @@
 <div class="login-container">
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>Connexion</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-                <mat-form-field appearance="fill" class="full-width">
-                    <mat-label>Nom d'utilisateur</mat-label>
-                    <input matInput [(ngModel)]="username" name="username" required />
-                </mat-form-field>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Connexion</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Nom d'utilisateur</mat-label>
+          <input matInput [(ngModel)]="username" name="username" required />
+        </mat-form-field>
 
-                <mat-form-field appearance="fill" class="full-width">
-                    <mat-label>Mot de passe</mat-label>
-                    <input
-                        matInput
-                        [type]="passwordFieldType"
-                        [(ngModel)]="password"
-                        name="password"
-                        required
-                    />
-                    <button
-                        mat-icon-button
-                        matSuffix
-                        (click)="togglePasswordVisibility()"
-                        type="button"
-                    >
-                        <mat-icon>{{
-                            passwordFieldType === "password"
-                                ? "visibility_off"
-                                : "visibility"
-                        }}</mat-icon>
-                    </button>
-                </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Mot de passe</mat-label>
+          <input
+            matInput
+            [type]="passwordFieldType"
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
+          <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+            <mat-icon
+              >{{ passwordFieldType === "password" ? "visibility_off" : "visibility" }}</mat-icon
+            >
+          </button>
+        </mat-form-field>
 
-                <div class="actions">
-                    <button
-                        mat-raised-button
-                        color="primary"
-                        type="submit"
-                        [disabled]="!loginForm.form.valid"
-                    >
-                        Se connecter
-                    </button>
-                </div>
-            </form>
-        </mat-card-content>
-        <mat-card-footer>
-            <p class="login-hint">
-                <br />
-                Admin: `admin` / `password`<br />
-                Utilisateur: `user` / `password`
-            </p>
-        </mat-card-footer>
-    </mat-card>
+        <div class="actions">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="!loginForm.form.valid"
+          >
+            Se connecter
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-card-footer>
+      <p class="login-hint">
+        <br />
+        Admin: `admin` / `admin`<br />
+        Utilisateur: `user` / `user`
+      </p>
+    </mat-card-footer>
+  </mat-card>
 </div>
