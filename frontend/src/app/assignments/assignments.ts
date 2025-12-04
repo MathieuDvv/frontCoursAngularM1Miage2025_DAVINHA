@@ -131,10 +131,23 @@ export class Assignments implements OnInit {
   }
 
   onRenduChange(assignment: Assignment): void {
-    // Mettre à jour l'état 'rendu' de l'affectation
-    // Dans un vrai projet, vous appelleriez un service pour persister ce changement
-    console.log(`Assignment '${assignment.nom}' rendu status changed to ${assignment.rendu}`);
-    // Also re-apply filters in case "Hide Completed" is on
-    this.applyFilters();
+    this.assignmentsService.updateAssignment(assignment).subscribe({
+      next: () => {
+        console.log(`Assignment '${assignment.nom}' rendu status changed to ${assignment.rendu}`);
+        // We do not strictly need to reload from server if we just want to update the view state,
+        // but if 'hideCompleted' is active, we might want to remove it from view.
+        // However, calling applyFilters() immediately reloads everything.
+        // Let's just keep the current list consistent or reload if necessary.
+        if (this.hideCompleted) {
+             this.applyFilters();
+        }
+      },
+      error: (err) => {
+        console.error('Error updating assignment', err);
+        // Revert the change in UI if update failed
+        assignment.rendu = !assignment.rendu;
+        alert('Failed to update assignment status.');
+      }
+    });
   }
 }
