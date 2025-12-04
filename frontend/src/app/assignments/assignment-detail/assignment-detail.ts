@@ -65,7 +65,8 @@ export class AssignmentDetailComponent implements OnInit {
 
   onRenduChange() {
     if (this.assignment) {
-      this.assignmentsService.updateAssignment(this.assignment).subscribe(() => {
+      const userId = this.authService.currentUser?._id;
+      this.assignmentsService.updateAssignment(this.assignment, userId).subscribe(() => {
         console.log('Assignment updated');
       });
     }
@@ -88,7 +89,8 @@ export class AssignmentDetailComponent implements OnInit {
 
   onSave() {
     if (this.assignment) {
-      this.assignmentsService.updateAssignment(this.assignment).subscribe(() => {
+      const userId = this.authService.currentUser?._id;
+      this.assignmentsService.updateAssignment(this.assignment, userId).subscribe(() => {
         this.originalAssignment = { ...this.assignment! };
         this.editMode = false;
       });

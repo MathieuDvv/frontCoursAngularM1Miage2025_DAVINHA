@@ -64,7 +64,8 @@ export class Assignments implements OnInit {
   }
 
   loadAssignments(): void {
-    this.assignmentsService.getAssignments(this.page, this.limit, this.sortOrder, this.searchTerm, this.hideCompleted).subscribe(data => {
+    const userId = this.authService.currentUser?._id || '';
+    this.assignmentsService.getAssignments(this.page, this.limit, this.sortOrder, this.searchTerm, this.hideCompleted, userId).subscribe(data => {
       if (!data || !data.docs) {
         this.allAssignments = [];
         this.totalDocs = 0;
@@ -131,7 +132,8 @@ export class Assignments implements OnInit {
   }
 
   onRenduChange(assignment: Assignment): void {
-    this.assignmentsService.updateAssignment(assignment).subscribe({
+    const userId = this.authService.currentUser?._id;
+    this.assignmentsService.updateAssignment(assignment, userId).subscribe({
       next: () => {
         console.log(`Assignment '${assignment.nom}' rendu status changed to ${assignment.rendu}`);
         // We do not strictly need to reload from server if we just want to update the view state,
