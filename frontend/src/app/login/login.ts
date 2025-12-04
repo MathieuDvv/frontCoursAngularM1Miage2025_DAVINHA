@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon'; // Import MatIconModule
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
@@ -15,7 +16,8 @@ import { AuthService } from '../auth.service';
     MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule // Add MatIconModule to imports
   ],
   templateUrl: './login.html',
   styleUrl: './login.css'
@@ -23,6 +25,7 @@ import { AuthService } from '../auth.service';
 export class Login {
   username = '';
   password = '';
+  passwordFieldType: string = 'password'; // Added property
   authService = inject(AuthService);
   router = inject(Router);
 
@@ -38,5 +41,11 @@ export class Login {
         alert('Login failed: ' + (err.error?.message || 'Unknown error'));
       }
     });
+  }
+
+  // Added method to toggle password visibility
+  togglePasswordVisibility() {
+    this.passwordFieldType =
+      this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 }

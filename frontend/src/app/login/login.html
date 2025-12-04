@@ -14,11 +14,23 @@
                     <mat-label>Mot de passe</mat-label>
                     <input
                         matInput
-                        type="password"
+                        [type]="passwordFieldType"
                         [(ngModel)]="password"
                         name="password"
                         required
                     />
+                    <button
+                        mat-icon-button
+                        matSuffix
+                        (click)="togglePasswordVisibility()"
+                        type="button"
+                    >
+                        <mat-icon>{{
+                            passwordFieldType === "password"
+                                ? "visibility_off"
+                                : "visibility"
+                        }}</mat-icon>
+                    </button>
                 </mat-form-field>
 
                 <div class="actions">

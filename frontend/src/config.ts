@@ -1,3 +1,3 @@
 export const config = {
-  apiUrl: 'http://localhost:3000/api',
+  apiUrl: 'https://apicoursangularm1miage2025-davinha.onrender.com/api',
 };
